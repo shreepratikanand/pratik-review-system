@@ -75,11 +75,12 @@ textarea:focus{border-color:var(--acc);background:#fff}
 /* ============ CONFIG — edit freely ============ */
 const COUNTRY_CODE="91";
 const BUSINESSES=[
- {name:"Alliance",gLink:"https://g.page/r/Cf-3hTcr7hioEBM/review",tags:[
-  {id:"teaching",label:"Good teaching"},{id:"staff_care",label:"Caring staff"},
-  {id:"results",label:"Good results"},{id:"safety",label:"Safe environment"},
-  {id:"activities",label:"Activities & sports"},{id:"fees",label:"Affordable fees"},
-  {id:"communication",label:"Good communication"},{id:"clean",label:"Clean campus"}]},
+ {name:"Aliens Developer",gLink:"https://g.page/r/Cf-3hTcr7hioEBM/review",tags:[
+  {id:"investment",label:"Good investment value"},{id:"value",label:"Value for money"},
+  {id:"construction",label:"Quality construction"},{id:"paperwork",label:"Clear paperwork"},
+  {id:"genuine_deal",label:"Genuine property deal"},{id:"location",label:"Good location"},
+  {id:"registration",label:"Smooth registration process"},{id:"legal",label:"Legal transparency"},
+  {id:"pricing",label:"Fair pricing"},{id:"trusted",label:"Trusted developer"}]},
  {name:"Business 3",gLink:"",tags:[
   {id:"service",label:"Good service"},{id:"staff_care",label:"Caring staff"},
   {id:"value",label:"Value for money"},{id:"clean",label:"Clean place"},
@@ -116,9 +117,9 @@ const TAG_LIB={
  activities:{en:["Along with studies, activities and sports get equal attention.","Kids get a good balance of studies and extra activities."],
   hing:["Padhai ke saath-saath activities aur sports pe bhi achha focus hai.","Bachchon ko studies aur activities dono ka sahi balance milta hai."],
   hi:["पढ़ाई के साथ-साथ एक्टिविटीज़ और खेल पर भी अच्छा ध्यान दिया जाता है.","बच्चों को पढ़ाई और एक्टिविटीज़ दोनों का सही संतुलन मिलता है."]},
- communication:{en:["Parents are kept in the loop with regular updates.","Communication is smooth — we always know how things are going."],
-  hing:["Parents ko regular updates milte rehte hain, sab transparent hai.","Communication bahut smooth hai, hamesha pata rehta hai bachcha kaisa chal raha hai."],
-  hi:["पैरेंट्स को नियमित अपडेट मिलते रहते हैं, सब पारदर्शी है.","कम्युनिकेशन बहुत स्मूद है, हमेशा पता रहता है कि बच्चा कैसा चल रहा है."]},
+ communication:{en:["Communication was clear and honest at every step.","They kept us informed throughout — no confusion anywhere."],
+  hing:["Communication bilkul clear aur honest thi, har step pe.","Poore process mein update dete rahe, kahin confusion nahi hua."],
+  hi:["बातचीत बिल्कुल साफ़ और ईमानदार थी, हर कदम पर.","पूरी प्रक्रिया में अपडेट देते रहे, कहीं कोई भ्रम नहीं."]},
  clean:{en:["Everything is kept neat and clean.","The place is spotless and well maintained."],
   hing:["Jagah bilkul saaf-suthri rakhte hain.","Sab kuch clean aur well maintained hai."],
   hi:["जगह बिल्कुल साफ़-सुथरी रखते हैं.","सब कुछ साफ़ और अच्छी तरह मेंटेन रहता है."]},
@@ -148,17 +149,53 @@ const TAG_LIB={
   hi:["समय का पूरा ध्यान रखते हैं, सब शेड्यूल पर होता है.","कभी इंतज़ार नहीं करना पड़ा, आपके समय को महत्व देते हैं."]},
  atmosphere:{en:["The atmosphere is welcoming and positive.","From the moment you walk in, you feel welcome."],
   hing:["Mahaul bahut positive aur welcoming hai.","Andar aate hi khud ko welcome feel hota hai."],
-  hi:["माहौल बहुत सकारात्मक और स्वागत भरा है.","अंदर आते ही खुद को स्वागत महसूस होता है."]}
+  hi:["माहौल बहुत सकारात्मक और स्वागत भरा है.","अंदर आते ही खुद को स्वागत महसूस होता है."]},
+ investment:{
+  en:["From an investment point of view, this is one of the best decisions we made.","Property value here is only going up — a smart investment."],
+  hing:["Investment point of view se humara best decision tha — property ki value badh rahi hai.","Investment ke liye bilkul sahi jagah hai, value aage aur badhegi."],
+  hi:["इन्वेस्टमेंट के हिसाब से हमारा बेहतरीन फ़ैसला था — प्रॉपर्टी की वैल्यू बढ़ रही है.","निवेश के लिए बिल्कुल सही जगह है, वैल्यू आगे और बढ़ेगी."]},
+ construction:{
+  en:["Construction quality is genuinely solid — you can see the difference.","Build quality is excellent, no shortcuts anywhere."],
+  hing:["Construction ki quality bahut solid hai, kahin bhi koi kami nahi.","Build quality kamal ki hai, quality mein koi compromise nahi."],
+  hi:["कंस्ट्रक्शन की क्वालिटी बहुत मज़बूत है, कहीं भी कोई कमी नहीं.","बिल्ड क्वालिटी कमाल की है, क्वालिटी में कोई समझौता नहीं."]},
+ paperwork:{
+  en:["All the paperwork was clear and completed without any hassle.","Documentation was transparent and handled professionally."],
+  hing:["Saara paperwork clear aur proper tha, koi jhanjhat nahi.","Documentation bilkul transparent thi, sab kuch time pe complete hua."],
+  hi:["सारा कागज़ी काम साफ़ और सही था, कोई झंझट नहीं.","डॉक्यूमेंटेशन पूरी तरह पारदर्शी थी, सब कुछ समय पर हुआ."]},
+ genuine_deal:{
+  en:["It is a completely genuine deal — exactly as promised.","Everything was fair and transparent, nothing hidden at all."],
+  hing:["Deal bilkul genuine thi, jaisa bola gaya waisa hi mila.","Koi hidden charge nahi, sab kuch saaf-saaf bataya gaya."],
+  hi:["डील बिल्कुल असली थी, जैसा वादा किया गया वैसा ही मिला.","कोई छिपा हुआ चार्ज नहीं, सब कुछ साफ़-साफ़ बताया गया."]},
+ location:{
+  en:["The location is excellent — well connected and in a growing area.","Location is a big plus, everything important is nearby."],
+  hing:["Location bahut achhi hai, har taraf se connected hai.","Location ka plus point hai — school, market sab paas mein."],
+  hi:["लोकेशन बहुत अच्छी है, हर तरफ़ से जुड़ी हुई है.","लोकेशन का प्लस पॉइंट है — स्कूल, मार्केट सब पास में."]},
+ registration:{
+  en:["The whole registration process went through smoothly, without any stress.","Registry was completed quickly and smoothly — fully their responsibility."],
+  hing:["Registration ka poora process smooth chala, koi dikkat nahi aayi.","Registry jaldi aur aaram se ho gayi, sab unke manage mein."],
+  hi:["रजिस्ट्रेशन की पूरी प्रक्रिया आसानी से हो गई, कोई परेशानी नहीं.","रजिस्ट्री जल्दी और आराम से हो गई, सब उनके मैनेज में."]},
+ legal:{
+  en:["Everything is legally clear — documents are genuine and verified.","Full legal transparency — we checked everything with complete confidence."],
+  hing:["Legal sab kuch clear hai, documents verified aur genuine hain.","Poori legal transparency thi, bina dare sab check karaye."],
+  hi:["कानूनी रूप से सब कुछ साफ़ है, दस्तावेज़ असली और वेरिफाइड हैं.","पूरी लीगल पारदर्शिता थी, बिना डरे सब कुछ चेक कराया."]},
+ pricing:{
+  en:["Pricing is fair and honest — no unnecessary costs.","Rates are genuine for the quality and location you get."],
+  hing:["Price bilkul fair hai, koi faltu charge nahi.","Rate genuine hain — location aur quality ke hisaab se sahi."],
+  hi:["कीमत बिल्कुल उचित है, कोई फ़ालतू चार्ज नहीं.","रेट ईमानदार हैं — लोकेशन और क्वालिटी के हिसाब से सही."]},
+ trusted:{
+  en:["A developer you can trust — they keep their word.","Trustworthy team — every commitment was fulfilled."],
+  hing:["Bharosa kar sakte ho, jo kaha woh kiya.","Trusted developer hai, har commitment puri ki."],
+  hi:["भरोसा कर सकते हैं — जो कहा, वही किया.","भरोसेमंद डेवलपर है, हर वादा निभाया."]}
 };
 const GEN={
  en:{open:["Really happy with my experience here.","We've had a great experience overall.","Been associated with them for a while now, and it never disappoints.","Honestly impressed — worth sharing my experience."],
-  close:["Would definitely recommend to other parents.","5 stars from my side — thank you!","If you're comparing options, just go here.","Big thanks to the whole team for the care they put in."],
+  close:["Would definitely recommend to everyone.","5 stars from my side — thank you!","If you're comparing options, just go here.","Big thanks to the whole team for the care they put in."],
   conn:["Also,","Plus,","And"]},
  hing:{open:["Yahan ka experience bahut achha raha.","Overall bahut achha experience raha hai.","Kaafi time se jude hain, kabhi nirash nahi hue.","Sach kahoon toh bahut impressed hoon."],
-  close:["Doosre parents ko bhi recommend karunga/karungi.","5 star mere taraf se — dil se shukriya!","Koi compare kar raha ho toh yahin jaye, sochna mat.","Poori team ka bahut-bahut shukriya!"],
+  close:["Doosron ko bhi recommend karunga/karungi.","5 star mere taraf se — dil se shukriya!","Koi compare kar raha ho toh yahin jaye, sochna mat.","Poori team ka bahut-bahut shukriya!"],
   conn:["Aur toh aur,","Sath hi,","Plus,"]},
  hi:{open:["यहाँ का अनुभव बहुत अच्छा रहा.","समग्र रूप से बहुत अच्छा अनुभव रहा है.","काफ़ी समय से जुड़े हैं, कभी निराश नहीं हुए.","सच कहूँ तो बहुत प्रभावित हूँ."],
-  close:["दूसरे पैरेंट्स को भी सुझाऊँगा/सुझाऊँगी.","मेरी तरफ़ से 5 स्टार — दिल से धन्यवाद!","कोई तुलना कर रहा हो तो यहीं जाएँ, सोचना मत.","पूरी टीम का बहुत-बहुत धन्यवाद!"],
+  close:["सबको दिल से सुझाऊँगा/सुझाऊँगी.","मेरी तरफ़ से 5 स्टार — दिल से धन्यवाद!","कोई तुलना कर रहा हो तो यहीं जाएँ, सोचना मत.","पूरी टीम का बहुत-बहुत धन्यवाद!"],
   conn:["और तो और,","साथ ही,","इसके अलावा,"]}
 };
 const LATIN={en:1,hing:1};
