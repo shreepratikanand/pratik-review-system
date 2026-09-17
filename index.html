@@ -3,20 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quick Review Sender</title>
+<title>Pratik Review System</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--ink:#1c2330;--mut:#667085;--line:#e5e8ee;--acc:#0e9f6e;--acc-soft:#e7f6ee;--wa:#25d366}
+:root{--ink:#1c2330;--mut:#667085;--line:#e5e8ee;--acc:#0e9f6e;--acc-soft:#e7f6ee;--wa:#25d366;--gold:#d9a441}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans",sans-serif;background:#f3f5f8;color:var(--ink);-webkit-font-smoothing:antialiased}
-.wrap{max-width:480px;margin:0 auto;padding:16px 13px 40px}
-header{text-align:center;padding:8px 0 4px}
-header h1{font-size:21px;font-weight:800;letter-spacing:-.3px}
-header p{color:var(--mut);font-size:13px;margin-top:3px}
+.wrap{max-width:480px;margin:0 auto;padding:0 13px 34px}
+header.brand{background:linear-gradient(135deg,#10141f,#1e2c47 60%,#2b3d63);margin:0 -13px 16px;padding:26px 16px 22px;color:#fff;position:relative;overflow:hidden;border-bottom:3px solid var(--gold)}
+header.brand::before{content:"★";position:absolute;right:-14px;top:-22px;font-size:110px;color:#d9a441;opacity:.10}
+header.brand::after{content:"★";position:absolute;right:64px;bottom:-16px;font-size:52px;color:#d9a441;opacity:.07}
+.brand-row{display:flex;align-items:center;gap:13px;position:relative;z-index:1}
+.logo{flex:0 0 auto;width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#e2b45a,#b8842c);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff;letter-spacing:.5px;box-shadow:0 2px 10px rgba(0,0,0,.3)}
+.brand h1{font-size:21px;font-weight:800;letter-spacing:.6px;line-height:1.15}
+.brand .tag{color:#d8c9a3;font-size:12.5px;margin-top:3px}
+.brand .stars{color:var(--gold);font-size:11px;letter-spacing:4px;margin-top:5px}
+.counter{display:inline-flex;align-items:center;gap:7px;margin-top:14px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:6px 13px;font-size:12.5px;color:#e8edf4;position:relative;z-index:1}
+.counter b{color:var(--gold);font-size:14px}
 .card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px 15px;margin-top:13px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
 .card h2{font-size:14px;font-weight:700;color:#475467;margin-bottom:10px}
 .tabs{display:flex;gap:8px}
 .tab{flex:1;padding:11px 4px;border:1.5px solid var(--line);border-radius:13px;background:#fbfcfd;font-size:14px;font-weight:600;color:#475467;cursor:pointer;text-align:center;transition:all .15s;user-select:none}
 .tab.active{background:var(--ink);border-color:var(--ink);color:#fff}
+.biz-hint{font-size:11.5px;color:var(--mut);text-align:center;margin-top:9px;line-height:1.5}
 .seg{display:flex;gap:8px}
 .seg-b{flex:1;padding:9px 4px;border:1.5px solid var(--line);border-radius:11px;background:#fbfcfd;font-size:13.5px;font-weight:600;color:#475467;cursor:pointer;text-align:center;transition:all .15s;user-select:none}
 .seg-b.active{background:var(--acc-soft);border-color:var(--acc);color:#0b7a55}
@@ -24,7 +32,8 @@ header p{color:var(--mut);font-size:13px;margin-top:3px}
 .chip{padding:9px 14px;border:1.5px solid var(--line);border-radius:999px;background:#fbfcfd;font-size:13.5px;font-weight:600;color:#475467;cursor:pointer;transition:all .15s;user-select:none}
 .chip.on{background:var(--acc-soft);border-color:var(--acc);color:#0b7a55}
 label{display:block;font-size:12.5px;font-weight:600;color:#475467;margin:0 0 6px}
-input[type=tel]{width:100%;padding:15px 14px;border:1.5px solid var(--line);border-radius:14px;font-size:19px;font-weight:700;letter-spacing:.5px;font-family:inherit;color:var(--ink);background:#fbfcfd;outline:none;text-align:center}
+input[type=text],input[type=tel]{width:100%;padding:14px;border:1.5px solid var(--line);border-radius:14px;font-size:16px;font-weight:600;font-family:inherit;color:var(--ink);background:#fbfcfd;outline:none}
+input[type=tel]{font-size:19px;letter-spacing:.5px;text-align:center}
 input:focus{border-color:var(--acc);background:#fff}
 .err{color:#d92d20;font-size:12.5px;margin-top:6px;display:none;font-weight:600}
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px;border:none;border-radius:15px;font-size:16.5px;font-weight:800;font-family:inherit;cursor:pointer}
@@ -35,18 +44,30 @@ textarea{width:100%;padding:12px 13px;border:1.5px solid var(--line);border-radi
 textarea:focus{border-color:var(--acc);background:#fff}
 .hint{font-size:12px;color:var(--mut);margin-top:9px;line-height:1.55;text-align:center}
 .note{background:#fff8e1;border:1px solid #f3e2a0;border-radius:14px;padding:11px 14px;font-size:12.5px;color:#6d5410;line-height:1.5;margin-top:14px}
+footer{margin-top:22px;padding:16px 10px;text-align:center;color:var(--mut);font-size:12px;line-height:1.7;border-top:1px solid var(--line)}
+footer b{color:var(--ink)}
+.hist-link{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;padding:10px;border-radius:12px;background:#fff;border:1.5px dashed var(--line);color:var(--mut);font-size:13px;font-weight:700;text-decoration:none}
+.hist-link:active{background:#f6f8fb}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header>
-<h1>⭐ Quick Review Sender</h1>
-<p>Number daalo, button dabao — review customer ke WhatsApp par</p>
+<header class="brand">
+  <div class="brand-row">
+    <div class="logo">PR</div>
+    <div>
+      <h1>PRATIK REVIEW SYSTEM</h1>
+      <div class="tag">Google review bhejne ka sabse aasaan tareeka</div>
+      <div class="stars">★★★★★</div>
+    </div>
+  </div>
+  <div class="counter">⭐ Ab tak <b id="cnt">0</b> reviews bheje</div>
 </header>
 
 <section class="card">
   <h2>Business</h2>
   <div class="tabs" id="bizTabs"></div>
+  <div class="biz-hint">⬆️ Jo business yahan select hai, review usi ki history mein jayega</div>
   <div style="height:12px"></div>
   <h2>Language</h2>
   <div class="seg" id="langSeg"></div>
@@ -59,23 +80,35 @@ textarea:focus{border-color:var(--acc);background:#fff}
 </section>
 
 <section class="card">
+  <label>Customer ka naam</label>
+  <input type="text" id="name" maxlength="40" placeholder="Jaise: Ramesh Sharma">
+  <div class="err" id="nameErr">Customer ka naam likho</div>
+  <div style="height:12px"></div>
   <label>Customer ka WhatsApp number</label>
   <input type="tel" id="mobile" inputmode="numeric" maxlength="10" placeholder="98765 43210">
   <div class="err" id="mobileErr">Sahi 10-digit number daalo</div>
   <button class="btn btn-wa" id="sendBtn">📲 WhatsApp par Review Bhejo</button>
-  <button class="btn btn-mini" id="shuffleBtn">🔄 Message naya version — preview dekho</button>
+  <button class="btn btn-mini" id="shuffleBtn">🔄 New version of message — see preview below</button>
   <textarea id="preview" placeholder="Jo message bheja jayega woh yahan dikhega — chaaho toh yahin edit bhi kar sakte ho"></textarea>
   <div class="hint">Button dabate hi WhatsApp khulega — bas send ka arrow dabana hai. Message ke saath Google review link bhi jata hai, customer wahan paste karke post kar dega.</div>
 </section>
 
 <div class="note">⚠️ Customer apne Google account se post kare — kabhi business ke phone/Wi-Fi se nahi. Reviews ko din-b-din phailao, sab ek saath nahi.</div>
+
+<a class="hist-link" href="history.html">🔐 Review System</a>
+
+<footer>
+  <b>ALLIANCE DEVELOPER</b><br>
+  Har review Google par customer ke apne account se post hota hai 🙏
+</footer>
 </div>
 
 <script>
 /* ============ CONFIG — edit freely ============ */
 const COUNTRY_CODE="91";
+const SHEET_URL=""; /* Google Sheet ka Apps Script URL yahan paste hoga (Google-Sheet-Setup.txt dekho) */
 const BUSINESSES=[
- {name:"Aliens Developer",gLink:"https://g.page/r/Cf-3hTcr7hioEBM/review",tags:[
+ {name:"Alliance Developer",gLink:"https://g.page/r/Cf-3hTcr7hioEBM/review",tags:[
   {id:"investment",label:"Good investment value"},{id:"value",label:"Value for money"},
   {id:"construction",label:"Quality construction"},{id:"paperwork",label:"Clear paperwork"},
   {id:"genuine_deal",label:"Genuine property deal"},{id:"location",label:"Good location"},
@@ -217,6 +250,28 @@ function buildMsg(){
   return m;
 }
 
+/* ============ HISTORY LOG ============ */
+const LOG_KEY="quickReviewLog_v1";
+function loadLog(){ try{ return JSON.parse(localStorage.getItem(LOG_KEY))||[]; }catch(e){ return []; } }
+function saveEntry(name,mobile,msg){
+  const b=BUSINESSES[state.biz];
+  const langLabel=(LANGS.find(l=>l.id===state.lang)||{}).label||"";
+  const tagLabels=[...state.tags].map(id=>{const t=b.tags.find(x=>x.id===id);return t?t.label:id;});
+  const entry={s:0,name:name,mobile:mobile,biz:b.name,lang:langLabel,
+    tags:tagLabels.join(", "),link:b.gLink||"",ts:new Date().toLocaleString("en-IN")};
+  const log=loadLog();
+  entry.s=log.length+1;
+  log.push(entry);
+  try{ localStorage.setItem(LOG_KEY,JSON.stringify(log)); }catch(e){}
+  renderCounter();
+  if(SHEET_URL){
+    try{
+      fetch(SHEET_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(entry)});
+    }catch(e){}
+  }
+}
+function renderCounter(){ $("cnt").textContent=loadLog().length; }
+
 function renderBiz(){
   $("bizTabs").innerHTML=BUSINESSES.map((b,i)=>`<div class="tab ${i===state.biz?"active":""}" data-i="${i}">${b.name}</div>`).join("");
   [...$("bizTabs").children].forEach(t=>t.onclick=()=>{state.biz=+t.dataset.i;state.tags.clear();renderBiz();renderChips();});
@@ -236,14 +291,17 @@ $("shuffleBtn").onclick=()=>{
   $("preview").value=buildMsg();
 };
 $("sendBtn").onclick=()=>{
+  const nm=$("name").value.trim();
+  if(!nm){$("nameErr").style.display="block";$("name").focus();return;}
   const m=$("mobile").value.replace(/\D/g,"");
   if(!/^\d{10}$/.test(m)){$("mobileErr").style.display="block";$("mobile").focus();return;}
   if(!state.tags.size&&!$("preview").value.trim()){$("tagsErr").style.display="block";return;}
   let msg=$("preview").value.trim();
   if(!msg){ msg=buildMsg(); $("preview").value=msg; }
+  saveEntry(nm,m,msg);
   window.open("https://wa.me/"+COUNTRY_CODE+m+"?text="+encodeURIComponent(msg),"_blank");
 };
-renderBiz();renderChips();renderLang();
+renderBiz();renderChips();renderLang();renderCounter();
 </script>
 </body>
 </html>
