@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0f1b2d">
+<title>Dashboard — Pratik Review System</title>
+<style>
+:root{
+  --navy:#0f1b2d; --navy2:#182a45; --gold:#c9a227; --gold2:#e8cd6f;
+  --bg:#f2f5fa; --card:#ffffff; --line:#e3e8f0; --mut:#6b7686;
+  --green:#1a9e55; --wa:#25d366; --red:#d64545;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans Devanagari",sans-serif;background:var(--bg);color:var(--navy);min-height:100vh}
+header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 10px rgba(15,27,45,.25)}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-weight:800;font-size:21px;font-family:Georgia,'Times New Roman',serif;font-style:italic;letter-spacing:-1px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(232,205,111,.35) inset}
+.t1{font-size:16px;font-weight:700}
+.t2{font-size:9.5px;letter-spacing:1.6px;color:var(--gold2);font-weight:600}
+.hbtns{display:flex;gap:8px}
+.hbtn{background:rgba(255,255,255,.12);border:1px solid rgba(201,162,39,.5);color:var(--gold2);font-size:11.5px;font-weight:700;padding:6px 11px;border-radius:999px;cursor:pointer}
+main{max-width:640px;margin:0 auto;padding:14px 14px 60px}
+.card{background:var(--card);border-radius:16px;padding:16px;box-shadow:0 3px 14px rgba(15,27,45,.07);border:1px solid var(--line);margin-bottom:14px}
+.sect{font-size:10.5px;font-weight:800;letter-spacing:1.4px;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
+label{display:block;font-size:12.5px;font-weight:700;margin:10px 0 5px}
+input,select{width:100%;padding:12px;border:1.5px solid var(--line);border-radius:12px;font-size:15px;font-family:inherit;background:#fbfcfe;color:var(--navy);outline:none}
+input:focus,select:focus{border-color:var(--gold)}
+.big{display:block;width:100%;margin-top:16px;padding:15px;border:none;border-radius:13px;background:var(--navy);color:#fff;font-size:15.5px;font-weight:800;text-align:center;cursor:pointer;text-decoration:none}
+.big:active{transform:scale(.98)}
+.big.gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy)}
+.filters{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.filters label{margin:0}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.stat{background:#fbfcfe;border:1px solid var(--line);border-radius:12px;padding:10px 6px;text-align:center}
+.stat b{display:block;font-size:20px;color:var(--navy)}
+.stat span{font-size:9.5px;color:var(--mut);font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+.stat.g b{color:var(--green)}
+.stat.r b{color:var(--red)}
+.bars h4{font-size:12px;margin:10px 0 6px;color:var(--mut)}
+.bar{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.bar .nm{flex:0 0 92px;font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .tr{flex:1;background:#eef1f6;border-radius:999px;height:14px;overflow:hidden}
+.bar .fl{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:999px}
+.bar .ct{flex:0 0 26px;font-size:12px;font-weight:800;text-align:right}
+.entry{border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px;background:#fff}
+.e1{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.e1 b{font-size:14.5px}
+.badge{font-size:10px;font-weight:800;letter-spacing:.5px;padding:4px 9px;border-radius:999px;text-transform:uppercase}
+.badge.sent{background:#fff4e0;color:#a06a00}
+.badge.posted{background:#e2f7ea;color:var(--green)}
+.e2{font-size:12.5px;color:var(--mut);margin-top:4px}
+.e2 a{color:var(--navy);font-weight:700;text-decoration:none}
+.e3{font-size:12px;margin-top:4px;color:var(--mut)}
+.etags{font-size:11px;color:var(--gold);font-weight:700;margin-top:5px}
+.erev{font-size:13px;line-height:1.55;margin-top:8px;color:#2a3648;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer}
+.erev.open{display:block;-webkit-line-clamp:unset}
+.ebtns{display:flex;gap:8px;margin-top:10px}
+.ebtn{flex:1;padding:10px;border-radius:10px;border:none;font-size:12.5px;font-weight:800;cursor:pointer;text-align:center;text-decoration:none}
+.ebtn.g{background:var(--green);color:#fff}
+.ebtn.w{background:var(--wa);color:#fff}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:11px 18px;border-radius:999px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:.3s;z-index:60;max-width:88%;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.hide{display:none !important}
+.center{text-align:center}
+.note{font-size:12px;color:var(--mut);line-height:1.5}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="logo">P</div>
+    <div><div class="t1">Pratik Review System</div><div class="t2">ALLIANCE DEVELOPER &bull; DASHBOARD</div></div>
+  </div>
+  <div class="hbtns hide" id="hbtns">
+    <button class="hbtn" id="refreshBtn">&#8635; Refresh</button>
+    <button class="hbtn" id="logoutBtn">Lock &#128274;</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- LOGIN -->
+  <section id="loginSec">
+    <div class="card">
+      <div class="sect">&#128274; Password</div>
+      <label>Dashboard password</label>
+      <input id="passInput" type="password" placeholder="Password" autocomplete="off">
+      <button class="big gold" id="loginBtn">Open Dashboard</button>
+      <p class="note center" style="margin-top:12px">The password is asked every time — for safety.</p>
+    </div>
+  </section>
+
+  <!-- SETUP NEEDED -->
+  <section id="setupSec" class="hide">
+    <div class="card center">
+      <div class="sect">&#9888;&#65039; Setup pending</div>
+      <p class="note">The Google Sheet is not connected yet. Follow the steps in <b>Google-Sheet-Setup-v2.txt</b> first, then paste <b>SHEET_URL</b> into both files and re-upload the site.</p>
+      <a class="big" href="index.html">&larr; Back to the app</a>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <section id="mainSec" class="hide">
+
+    <div class="card">
+      <div class="sect">Filters</div>
+      <div class="filters">
+        <div>
+          <label>Time</label>
+          <select id="fRange">
+            <option value="today">Today</option>
+            <option value="7" selected>Last 7 days</option>
+            <option value="30">Last 30 days</option>
+            <option value="all">All time</option>
+          </select>
+        </div>
+        <div>
+          <label>Status</label>
+          <select id="fStatus">
+            <option value="all">All</option>
+            <option value="Sent">Pending only</option>
+            <option value="Posted">Posted only</option>
+          </select>
+        </div>
+        <div>
+          <label>Business</label>
+          <select id="fBiz"></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="sect">Numbers</div>
+      <div class="stats">
+        <div class="stat"><b id="stTotal">0</b><span>Total</span></div>
+        <div class="stat"><b id="stToday">0</b><span>Today</span></div>
+        <div class="stat"><b id="stWeek">0</b><span>7 days</span></div>
+        <div class="stat g"><b id="stPosted">0</b><span>Posted</span></div>
+        <div class="stat r"><b id="stPending">0</b><span>Pending</span></div>
+      </div>
+      <div class="bars">
+        <h4>By business</h4>
+        <div id="bizBars"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="sect">Excel download</div>
+      <p class="note">Rows matching the filters above will be exported.</p>
+      <button class="big gold" id="xlBtn">&#11015;&#65039; Download Excel</button>
+    </div>
+
+    <div class="card">
+      <div class="sect">Reviews (<span id="listCount">0</span>)</div>
+      <div id="list"></div>
+    </div>
+
+    <p class="note center" style="margin-bottom:10px">Tip: tap a review text to expand it.</p>
+  </section>
+
+</main>
+
+<div id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+/* ============================================================
+   CONFIG — keep SHEET_URL and PASS same as index.html
+   ============================================================ */
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzcU3jNh7822bq01l5Jm--1vO6u278hrQMhdBjTDoSBhJAjZgcQUdUjr5Rz7xQ3q9w/exec';           // <-- paste the Apps Script /exec URL here
+const PASS = 'pratik@2005';     // <-- same as DASH_PASS in Google-Sheet-Setup-v2.txt
+
+// For reminder WhatsApp — keep business names same as index.html
+const GLINKS = {
+  'Alliance Developer': 'https://g.page/r/Cf-3hTcr7hioEBM/review'
+};
+
+/* ============================================================ */
+const $ = id => document.getElementById(id);
+let ROWS = [];
+
+function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),2600); }
+
+/* ---------- login + data ---------- */
+$('loginBtn').onclick = load;
+$('passInput').addEventListener('keydown', e => { if(e.key==='Enter') load(); });
+async function load(){
+  if(!SHEET_URL){ $('loginSec').classList.add('hide'); $('setupSec').classList.remove('hide'); return; }
+  const btn = $('loginBtn'); btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Loading data...';
+  try{
+    const r = await fetch(SHEET_URL + '?action=list&pass=' + encodeURIComponent($('passInput').value));
+    const j = await r.json();
+    if(j && j.ok){
+      ROWS = j.rows || [];
+      $('loginSec').classList.add('hide'); $('setupSec').classList.add('hide'); $('mainSec').classList.remove('hide'); $('hbtns').classList.remove('hide');
+      buildFilterOptions(); render();
+      toast('Loaded — ' + ROWS.length + ' reviews');
+    }else if(j && j.err === 'ERR_PASS'){
+      toast('Wrong password'); $('passInput').select();
+    }else{ toast('Something went wrong — please try again'); }
+  }catch(e){ toast('Could not connect to the internet or Sheet'); }
+  btn.disabled = false; btn.textContent = 'Open Dashboard';
+}
+$('refreshBtn').onclick = () => { $('passInput').value = PASS; load(); };
+$('logoutBtn').onclick = () => {
+  ROWS = []; $('passInput').value = '';
+  $('mainSec').classList.add('hide'); $('hbtns').classList.add('hide'); $('loginSec').classList.remove('hide');
+};
+
+/* ---------- filters ---------- */
+function buildFilterOptions(){
+  const bizs = [...new Set(ROWS.map(r=>r.biz))];
+  $('fBiz').innerHTML = '<option value="all">All businesses</option>' + bizs.map(b=>'<option>'+esc(b)+'</option>').join('');
+}
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function filtered(forStats){
+  const range = $('fRange').value;
+  const now = new Date();
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  return ROWS.filter(r=>{
+    const t = new Date(r.iso).getTime();
+    if(range==='today' && t < startOfToday) return false;
+    if(range==='7' && t < startOfToday - 6*864e5) return false;
+    if(range==='30' && t < startOfToday - 29*864e5) return false;
+    if($('fBiz').value!=='all' && r.biz !== $('fBiz').value) return false;
+    if(!forStats && $('fStatus').value!=='all' && r.status !== $('fStatus').value) return false;
+    return true;
+  });
+}
+['fRange','fStatus','fBiz'].forEach(id => $(id).addEventListener('change', render));
+
+/* ---------- render ---------- */
+function render(){
+  const stat = filtered(true);
+  const list = filtered(false);
+  const now = new Date();
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  $('stTotal').textContent = stat.length;
+  $('stToday').textContent = stat.filter(r=>new Date(r.iso).getTime() >= startOfToday).length;
+  $('stWeek').textContent = stat.filter(r=>new Date(r.iso).getTime() >= startOfToday - 6*864e5).length;
+  $('stPosted').textContent = stat.filter(r=>r.status==='Posted').length;
+  $('stPending').textContent = stat.filter(r=>r.status!=='Posted').length;
+
+  bars($('bizBars'), countBy(stat,'biz'));
+  renderList(list);
+}
+function countBy(rows,key){
+  const m = {};
+  rows.forEach(r=>{ m[r[key]] = (m[r[key]]||0)+1; });
+  return Object.entries(m).sort((a,b)=>b[1]-a[1]);
+}
+function bars(el, data){
+  if(!data.length){ el.innerHTML = '<p class="note">No data.</p>'; return; }
+  const max = Math.max(...data.map(d=>d[1]));
+  el.innerHTML = data.map(([nm,ct]) =>
+    '<div class="bar"><div class="nm">'+esc(nm)+'</div><div class="tr"><div class="fl" style="width:'+Math.round(ct/max*100)+'%"></div></div><div class="ct">'+ct+'</div></div>'
+  ).join('');
+}
+function renderList(rows){
+  $('listCount').textContent = rows.length;
+  if(!rows.length){ $('list').innerHTML = '<p class="note">No reviews match this filter.</p>'; return; }
+  $('list').innerHTML = rows.map(r=>{
+    const badge = r.status==='Posted' ? '<span class="badge posted">Posted</span>' : '<span class="badge sent">Pending</span>';
+    let btns = '';
+    if(r.status!=='Posted'){
+      btns = '<div class="ebtns"><button class="ebtn g" onclick="markPosted(\''+r.id+'\')">&#9989; Mark as posted</button>' + remindBtn(r) + '</div>';
+    }
+    return '<div class="entry">' +
+      '<div class="e1"><b>'+esc(r.name)+'</b>'+badge+'</div>' +
+      '<div class="e2"><a href="tel:+'+esc(r.mob)+'">&#128222; '+esc(r.mob)+'</a> &middot; '+esc(r.prof||'-')+' &middot; '+esc(r.home||'-')+' &middot; '+esc(r.when)+'</div>' +
+      '<div class="e3">'+esc(r.biz)+' &middot; '+esc(r.lang)+' &middot; '+esc(r.source)+'</div>' +
+      (r.tags ? '<div class="etags">'+esc(r.tags)+'</div>' : '') +
+      '<div class="erev" onclick="this.classList.toggle(\'open\')">'+esc(r.review)+'</div>' +
+      btns + '</div>';
+  }).join('');
+}
+function remindBtn(r){
+  const link = GLINKS[r.biz] || '';
+  const msg = 'Namaste ' + r.name + ' ji 🙏 ' + r.biz + ' se request hai — agar aapne abhi tak Google review nahi diya, to ye link kholkar 2 minute me de dijiye' + (link ? ': ' + link : '. Bahut dhanyavaad!');
+  return '<a class="ebtn w" target="_blank" rel="noopener" href="https://wa.me/91'+esc(r.mob)+'?text='+encodeURIComponent(msg)+'">&#128172; Remind</a>';
+}
+async function markPosted(id){
+  const row = ROWS.find(r=>r.id===id); if(!row) return;
+  row.status = 'Posted';
+  try{ await fetch(SHEET_URL, {method:'POST', body: JSON.stringify({action:'posted', pass:PASS, id:id})}); toast('Marked as posted'); }
+  catch(e){ toast('Could not reach the Sheet — marked here anyway'); }
+  render();
+}
+
+/* ---------- excel ---------- */
+$('xlBtn').onclick = () => {
+  const rows = filtered(false);
+  if(!rows.length){ toast('Nothing to download'); return; }
+  const data = rows.map(r=>({
+    'Date': r.when, 'Business': r.biz, 'Name': r.name, 'Mobile': r.mob,
+    'Profession': r.prof, 'Hometown': r.home, 'Language': r.lang, 'Source': r.source, 'Tags': r.tags,
+    'Status': r.status, 'Review': r.review, 'Posted At': r.postedFmt || ''
+  }));
+  const ws = XLSX.utils.json_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Reviews');
+  const d = new Date();
+  const fname = 'Review-History-' + d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0') + '.xlsx';
+  XLSX.writeFile(wb, fname);
+};
+</script>
+</body>
+</html>

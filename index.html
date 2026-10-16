@@ -1,113 +1,183 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#0f1b2d">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <title>Pratik Review System</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--ink:#1c2330;--mut:#667085;--line:#e5e8ee;--acc:#0e9f6e;--acc-soft:#e7f6ee;--wa:#25d366;--gold:#d9a441}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans",sans-serif;background:#f3f5f8;color:var(--ink);-webkit-font-smoothing:antialiased}
-.wrap{max-width:480px;margin:0 auto;padding:0 13px 34px}
-header.brand{background:linear-gradient(135deg,#10141f,#1e2c47 60%,#2b3d63);margin:0 -13px 16px;padding:26px 16px 22px;color:#fff;position:relative;overflow:hidden;border-bottom:3px solid var(--gold)}
-header.brand::before{content:"★";position:absolute;right:-14px;top:-22px;font-size:110px;color:#d9a441;opacity:.10}
-header.brand::after{content:"★";position:absolute;right:64px;bottom:-16px;font-size:52px;color:#d9a441;opacity:.07}
-.brand-row{display:flex;align-items:center;gap:13px;position:relative;z-index:1}
-.logo{flex:0 0 auto;width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#e2b45a,#b8842c);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff;letter-spacing:.5px;box-shadow:0 2px 10px rgba(0,0,0,.3)}
-.brand h1{font-size:21px;font-weight:800;letter-spacing:.6px;line-height:1.15}
-.brand .tag{color:#d8c9a3;font-size:12.5px;margin-top:3px}
-.brand .stars{color:var(--gold);font-size:11px;letter-spacing:4px;margin-top:5px}
-.counter{display:inline-flex;align-items:center;gap:7px;margin-top:14px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:6px 13px;font-size:12.5px;color:#e8edf4;position:relative;z-index:1}
-.counter b{color:var(--gold);font-size:14px}
-.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px 15px;margin-top:13px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
-.card h2{font-size:14px;font-weight:700;color:#475467;margin-bottom:10px}
-.tabs{display:flex;gap:8px}
-.tab{flex:1;padding:11px 4px;border:1.5px solid var(--line);border-radius:13px;background:#fbfcfd;font-size:14px;font-weight:600;color:#475467;cursor:pointer;text-align:center;transition:all .15s;user-select:none}
-.tab.active{background:var(--ink);border-color:var(--ink);color:#fff}
-.biz-hint{font-size:11.5px;color:var(--mut);text-align:center;margin-top:9px;line-height:1.5}
-.seg{display:flex;gap:8px}
-.seg-b{flex:1;padding:9px 4px;border:1.5px solid var(--line);border-radius:11px;background:#fbfcfd;font-size:13.5px;font-weight:600;color:#475467;cursor:pointer;text-align:center;transition:all .15s;user-select:none}
-.seg-b.active{background:var(--acc-soft);border-color:var(--acc);color:#0b7a55}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{padding:9px 14px;border:1.5px solid var(--line);border-radius:999px;background:#fbfcfd;font-size:13.5px;font-weight:600;color:#475467;cursor:pointer;transition:all .15s;user-select:none}
-.chip.on{background:var(--acc-soft);border-color:var(--acc);color:#0b7a55}
-label{display:block;font-size:12.5px;font-weight:600;color:#475467;margin:0 0 6px}
-input[type=text],input[type=tel]{width:100%;padding:14px;border:1.5px solid var(--line);border-radius:14px;font-size:16px;font-weight:600;font-family:inherit;color:var(--ink);background:#fbfcfd;outline:none}
-input[type=tel]{font-size:19px;letter-spacing:.5px;text-align:center}
-input:focus{border-color:var(--acc);background:#fff}
-.err{color:#d92d20;font-size:12.5px;margin-top:6px;display:none;font-weight:600}
-.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px;border:none;border-radius:15px;font-size:16.5px;font-weight:800;font-family:inherit;cursor:pointer}
-.btn:active{transform:scale(.99)}
-.btn-wa{background:var(--wa);color:#fff;margin-top:14px}
-.btn-mini{background:#fff;border:1.5px solid var(--line);color:#475467;padding:9px;font-size:13px;font-weight:700;border-radius:11px;margin-top:9px}
-textarea{width:100%;padding:12px 13px;border:1.5px solid var(--line);border-radius:13px;font-size:13.5px;font-family:inherit;color:var(--ink);background:#fbfcfd;outline:none;resize:vertical;min-height:120px;line-height:1.5;margin-top:6px}
-textarea:focus{border-color:var(--acc);background:#fff}
-.hint{font-size:12px;color:var(--mut);margin-top:9px;line-height:1.55;text-align:center}
-.note{background:#fff8e1;border:1px solid #f3e2a0;border-radius:14px;padding:11px 14px;font-size:12.5px;color:#6d5410;line-height:1.5;margin-top:14px}
-footer{margin-top:22px;padding:16px 10px;text-align:center;color:var(--mut);font-size:12px;line-height:1.7;border-top:1px solid var(--line)}
-footer b{color:var(--ink)}
-.hist-link{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;padding:10px;border-radius:12px;background:#fff;border:1.5px dashed var(--line);color:var(--mut);font-size:13px;font-weight:700;text-decoration:none}
-.hist-link:active{background:#f6f8fb}
+:root{
+  --navy:#0f1b2d; --navy2:#182a45; --gold:#c9a227; --gold2:#e8cd6f;
+  --bg:#f2f5fa; --card:#ffffff; --line:#e3e8f0; --mut:#6b7686;
+  --green:#1a9e55; --wa:#25d366; --red:#d64545;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans Devanagari",sans-serif;background:var(--bg);color:var(--navy);min-height:100vh}
+header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 10px rgba(15,27,45,.25)}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-weight:800;font-size:21px;font-family:Georgia,'Times New Roman',serif;font-style:italic;letter-spacing:-1px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(232,205,111,.35) inset}
+.t1{font-size:16px;font-weight:700;letter-spacing:.2px}
+.t2{font-size:9.5px;letter-spacing:1.6px;color:var(--gold2);font-weight:600}
+.chipwrap{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.chip{background:rgba(255,255,255,.12);border:1px solid rgba(201,162,39,.5);color:var(--gold2);font-size:11.5px;font-weight:700;padding:5px 10px;border-radius:999px;cursor:pointer}
+main{max-width:480px;margin:0 auto;padding:14px 14px 90px}
+.card{background:var(--card);border-radius:16px;padding:16px;box-shadow:0 3px 14px rgba(15,27,45,.07);border:1px solid var(--line);margin-bottom:14px}
+.sect{font-size:10.5px;font-weight:800;letter-spacing:1.4px;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+.sect .num{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);width:20px;height:20px;border-radius:50%;text-align:center;line-height:20px;font-size:11px;margin-right:7px}
+label{display:block;font-size:13px;font-weight:700;margin:14px 0 6px;color:var(--navy)}
+label:first-of-type{margin-top:0}
+label .req{color:var(--red)}
+input,select,textarea{width:100%;padding:12px 12px;border:1.5px solid var(--line);border-radius:12px;font-size:15px;font-family:inherit;background:#fbfcfe;color:var(--navy);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{flex:1;min-width:100px;padding:11px 8px;border-radius:12px;border:1.5px solid var(--line);background:#fbfcfe;font-size:13.5px;font-weight:700;color:var(--navy);cursor:pointer;white-space:nowrap}
+.seg button.sel{background:var(--navy);border-color:var(--navy);color:#fff}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags button{padding:9px 13px;border-radius:999px;border:1.5px solid var(--line);background:#fbfcfe;font-size:13px;font-weight:600;color:var(--navy);cursor:pointer}
+.tags button.sel{background:linear-gradient(135deg,var(--gold),var(--gold2));border-color:var(--gold);color:var(--navy);font-weight:800}
+.big{display:block;width:100%;margin-top:18px;padding:15px;border:none;border-radius:13px;background:var(--navy);color:#fff;font-size:15.5px;font-weight:800;letter-spacing:.3px;text-align:center;cursor:pointer;text-decoration:none}
+.big:active{transform:scale(.98)}
+.big.wa{background:var(--wa)}
+.big.green{background:var(--green)}
+.big.gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy)}
+.row{display:flex;gap:10px;margin-top:10px}
+.row>*{flex:1}
+.half{display:block;padding:12px 8px;border-radius:12px;border:1.5px solid var(--line);background:#fbfcfe;color:var(--navy);font-size:13.5px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer}
+.half.rec{background:var(--red);border-color:var(--red);color:#fff;animation:pulse 1.2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.75}}
+.link{display:block;margin:14px auto 0;background:none;border:none;color:var(--mut);font-size:13px;font-weight:600;cursor:pointer;text-decoration:underline}
+textarea{min-height:150px;resize:vertical;line-height:1.55}
+.preview{background:#fbfcfe;border:1.5px dashed var(--line);border-radius:12px;padding:14px;font-size:14px;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+.recline{font-size:12.5px;color:var(--mut);margin-bottom:10px;line-height:1.5}
+.recline b{color:var(--navy)}
+.tip{margin-top:12px;font-size:11.5px;color:var(--mut);text-align:center;line-height:1.5}
+.done{text-align:center;padding:28px 16px}
+.tick{width:74px;height:74px;border-radius:50%;background:linear-gradient(135deg,var(--green),#2ecb74);color:#fff;font-size:38px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;box-shadow:0 6px 18px rgba(26,158,85,.35)}
+.done h2{font-size:21px;margin-bottom:6px}
+.done p{font-size:13.5px;color:var(--mut);margin-bottom:6px}
+footer{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);border-top:1px solid var(--line);padding:9px 14px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--mut);backdrop-filter:blur(6px)}
+footer a{color:var(--navy);font-weight:700;text-decoration:none}
+#toast{position:fixed;left:50%;bottom:70px;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:11px 18px;border-radius:999px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:.3s;z-index:60;max-width:88%;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.modal{position:fixed;inset:0;background:rgba(15,27,45,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.modal.show{display:flex}
+.mbox{background:#fff;border-radius:16px;padding:20px;width:100%;max-width:340px}
+.mbox h3{font-size:16px;margin-bottom:6px}
+.mbox p{font-size:12.5px;color:var(--mut);margin-bottom:12px;line-height:1.5}
+#qrbox{display:flex;justify-content:center;margin:12px 0;padding:10px;background:#fff;border:1px solid var(--line);border-radius:12px;min-height:120px}
+.hide{display:none !important}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header class="brand">
-  <div class="brand-row">
-    <div class="logo">PR</div>
-    <div>
-      <h1>PRATIK REVIEW SYSTEM</h1>
-      <div class="tag">Google review bhejne ka sabse aasaan tareeka</div>
-      <div class="stars">★★★★★</div>
-    </div>
+
+<header>
+  <div class="brand">
+    <div class="logo">P</div>
+    <div><div class="t1">Pratik Review System</div><div class="t2">ALLIANCE DEVELOPER &bull; REVIEW PANEL</div></div>
   </div>
-  <div class="counter">⭐ Ab tak <b id="cnt">0</b> reviews bheje</div>
+  <div class="chipwrap">
+    <div class="chip" id="countChip">&#11088; 0 reviews</div>
+  </div>
 </header>
 
-<section class="card">
-  <h2>Business</h2>
-  <div class="tabs" id="bizTabs"></div>
-  <div class="biz-hint">⬆️ Jo business yahan select hai, review usi ki history mein jayega</div>
-  <div style="height:12px"></div>
-  <h2>Language</h2>
-  <div class="seg" id="langSeg"></div>
-</section>
+<main>
 
-<section class="card">
-  <h2>Kya achha laga? (tags tap karo)</h2>
-  <div class="chips" id="chips"></div>
-  <div class="err" id="tagsErr">Kam se kam ek tag select karo</div>
-</section>
+  <!-- 1 : CUSTOMER DETAILS -->
+  <section class="card" id="sec1">
+    <div class="sect"><span class="num">1</span>Customer details</div>
+    <label>Business</label>
+    <div class="seg" id="bizSeg"></div>
+    <label>Customer name <span class="req">*</span></label>
+    <input id="cName" type="text" placeholder="e.g. Ramesh Sharma" autocomplete="off">
+    <label>Mobile number <span class="req">*</span></label>
+    <input id="cMob" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit number">
+    <label>Profession</label>
+    <select id="cProf"></select>
+    <input id="cProfOther" type="text" placeholder="Type the profession" autocomplete="off" class="hide" style="margin-top:8px">
+    <label>Hometown</label>
+    <input id="cHome" type="text" placeholder="e.g. Meerut" autocomplete="off">
+    <label>Review language</label>
+    <div class="seg" id="langSeg"></div>
+    <button class="big gold" id="down1">Continue &darr;</button>
+  </section>
 
-<section class="card">
-  <label>Customer ka naam</label>
-  <input type="text" id="name" maxlength="40" placeholder="Jaise: Ramesh Sharma">
-  <div class="err" id="nameErr">Customer ka naam likho</div>
-  <div style="height:12px"></div>
-  <label>Customer ka WhatsApp number</label>
-  <input type="tel" id="mobile" inputmode="numeric" maxlength="10" placeholder="98765 43210">
-  <div class="err" id="mobileErr">Sahi 10-digit number daalo</div>
-  <button class="btn btn-wa" id="sendBtn">📲 WhatsApp par Review Bhejo</button>
-  <button class="btn btn-mini" id="shuffleBtn">🔄 New version of message — see preview below</button>
-  <textarea id="preview" placeholder="Jo message bheja jayega woh yahan dikhega — chaaho toh yahin edit bhi kar sakte ho"></textarea>
-  <div class="hint">Button dabate hi WhatsApp khulega — bas send ka arrow dabana hai. Message ke saath Google review link bhi jata hai, customer wahan paste karke post kar dega.</div>
-</section>
+  <!-- 2 : REVIEW -->
+  <section class="card" id="sec2">
+    <div class="sect"><span class="num">2</span>Select review points</div>
+    <label>What did the customer like? (pick 2&ndash;4) &mdash; the draft below builds automatically</label>
+    <div class="tags" id="tagWrap"></div>
+    <button class="half" id="micBtn" style="width:100%;margin-top:12px">&#127908; Speak in your own words &mdash; tap to record</button>
+    <label>Draft &mdash; you can edit this</label>
+    <textarea id="draft"></textarea>
+    <div class="row">
+      <button class="half" id="shufBtn">&#128256; Another draft</button>
+      <button class="half" id="aiBtn">&#10024; AI draft</button>
+    </div>
+  </section>
 
-<div class="note">⚠️ Customer apne Google account se post kare — kabhi business ke phone/Wi-Fi se nahi. Reviews ko din-b-din phailao, sab ek saath nahi.</div>
+  <!-- 3 : SEND -->
+  <section class="card" id="sec3">
+    <div class="sect"><span class="num">3</span>Send</div>
+    <div class="recline" id="recLine"></div>
+    <div class="preview" id="preview"></div>
+    <a class="big wa" id="waBtn" target="_blank" rel="noopener">&#128242; Send on WhatsApp</a>
+    <div class="row">
+      <a class="half" id="gBtn" target="_blank" rel="noopener">&#11088; Google review page</a>
+      <button class="half" id="qrBtn">&#9641;&#9641; Show QR</button>
+    </div>
+    <button class="half" id="copyBtn" style="width:100%;margin-top:10px">&#128203; Copy</button>
+    <div class="tip">Reviews must always be posted from the customer's own Google account &mdash; never from a business phone or Wi-Fi. Spread reviews across days, not all at once.</div>
+  </section>
 
-<a class="hist-link" href="history.html">🔐 Review System</a>
+  <!-- DONE -->
+  <section class="card done hide" id="doneCard">
+    <div class="tick">&#10003;</div>
+    <h2>Done!</h2>
+    <p id="doneLine">WhatsApp sent to the customer.</p>
+    <button class="big green" id="postedBtn">&#9989; Review posted &mdash; mark it</button>
+    <button class="big" id="nextBtn">New customer &rarr;</button>
+  </section>
+
+</main>
 
 <footer>
-  <b>ALLIANCE DEVELOPER</b><br>
-  Har review Google par customer ke apne account se post hota hai 🙏
+  <a href="dashboard.html">&#128273; Dashboard</a>
+  <span id="syncState">...</span>
 </footer>
+
+<div id="toast"></div>
+
+<!-- QR modal -->
+<div class="modal" id="qrModal">
+  <div class="mbox">
+    <h3 style="text-align:center">Scan to open the Google review page</h3>
+    <p style="text-align:center">The customer scans this QR with their own phone &mdash; the Google review page opens directly. Paste the review there and post it.</p>
+    <div id="qrbox"></div>
+    <button class="link" id="qrClose">Close</button>
+  </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-/* ============ CONFIG — edit freely ============ */
-const COUNTRY_CODE="91";
-const SHEET_URL=""; /* Google Sheet ka Apps Script URL yahan paste hoga (Google-Sheet-Setup.txt dekho) */
-const BUSINESSES=[
+/* ============================================================
+   CONFIG — edit freely
+   (Content taken from the original Review System files)
+   ============================================================ */
+
+// Google Apps Script /exec URL (steps in Google-Sheet-Setup-v2.txt).
+// If left empty the app still works, but data stays on this phone only.
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzcU3jNh7822bq01l5Jm--1vO6u278hrQMhdBjTDoSBhJAjZgcQUdUjr5Rz7xQ3q9w/exec';
+
+// Password for Sheet + AI + Dashboard — same as history.html
+const PASS = 'pratik@2005';
+
+const COUNTRY_CODE = '91';
+
+const PROFESSIONS = ['Job','Student','Housewife','Delivery person / Rider','Teacher','Business','Farmer','Others'];
+
+const BUSINESSES = [
  {name:"Alliance Developer",gLink:"https://g.page/r/Cf-3hTcr7hioEBM/review",tags:[
   {id:"investment",label:"Good investment value"},{id:"value",label:"Value for money"},
   {id:"construction",label:"Quality construction"},{id:"paperwork",label:"Clear paperwork"},
@@ -120,188 +190,413 @@ const BUSINESSES=[
   {id:"punctual",label:"On time"},{id:"results",label:"Good results"},
   {id:"atmosphere",label:"Welcoming atmosphere"},{id:"fees",label:"Affordable"}]}
 ];
-const LANGS=[{id:"hi",label:"हिन्दी"},{id:"hing",label:"Hinglish"},{id:"en",label:"English"}];
-/* ============================================== */
-const state={biz:0,lang:"hing",tags:new Set()};
-const $=id=>document.getElementById(id);
-const pick=a=>a[Math.floor(Math.random()*a.length)];
-const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const LANGS = [{id:"hi",label:"Hindi"},{id:"hing",label:"Hinglish"},{id:"en",label:"English"}];
 
-/* ============ SENTENCE LIBRARY ============ */
-const TAG_LIB={
- results:{en:["The results speak for themselves — we've seen a clear improvement.","Results here have always been good, and it shows."],
-  hing:["Results ki baat karein toh bilkul solid hai — farak saaf dikh raha hai.","Yahan results hamesha achhe rehte hain."],
-  hi:["रिज़ल्ट की बात करें तो बिल्कुल बढ़िया है — फ़र्क साफ़ दिखता है.","यहाँ के रिज़ल्ट हमेशा अच्छे रहते हैं."]},
- staff_care:{en:["The staff is genuinely caring and treats everyone warmly.","Staff here really cares — you can tell from day one."],
-  hing:["Staff bahut caring hai, sabse achhi baat yahi laga.","Staff ka behaviour bahut pyaar wala hai, sabka khayal rakhte hain."],
-  hi:["स्टाफ बहुत केयरिंग है, सबसे अच्छी बात यही लगी.","स्टाफ का व्यवहार बहुत स्नेह भरा है, सबका ख्याल रखते हैं."]},
- fees:{en:["And the pricing is very reasonable for what you get.","Fees are affordable without any compromise on quality."],
-  hing:["Fees bhi kaafi reasonable hai, value ka paisa vas.","Charges affordable hain, quality pe koi compromise nahi."],
-  hi:["फीस भी काफ़ी रीज़नेबल है, पैसों का पूरा वसूल.","चार्ज अफ़ोर्डेबल हैं और क्वालिटी पर कोई समझौता नहीं."]},
- service:{en:["Service is quick and handled properly every single time.","The service here is excellent — nothing to complain about."],
-  hing:["Service bahut achhi hai, har baar proper dhyan se kaam hota hai.","Yahan ki service kamal ki hai, koi shikayat nahi."],
-  hi:["सर्विस बहुत अच्छी है, हर बार ध्यान से काम होता है.","यहाँ की सर्विस कमाल की है, कोई शिकायत नहीं."]},
- teaching:{en:["The way they teach is excellent — concepts become easy to grasp.","Teaching style is very practical and child-friendly."],
-  hing:["Padhane ka tarika bahut achha hai, bachche aaram se samajh jaate hain.","Teaching style bilkul practical hai, bachchon ko dilchasp lagta hai."],
-  hi:["पढ़ाने का तरीका बहुत अच्छा है, बच्चे आसानी से समझ पाते हैं.","टीचिंग स्टाइल बहुत प्रैक्टिकल है, बच्चों को दिलचस्प लगता है."]},
- safety:{en:["The place feels completely safe — children are well looked after.","Safety is clearly a priority here, which matters most to us."],
-  hing:["Jagah bilkul safe hai, bachchon ka poora dhyan rakha jaata hai.","Safety pe poora focus hai, jo humare liye sabse zaroori tha."],
-  hi:["जगह बिल्कुल सुरक्षित है, बच्चों का पूरा ध्यान रखा जाता है.","सेफ़्टी पर पूरा फ़ोकस है, जो हमारे लिए सबसे ज़रूरी था."]},
- activities:{en:["Along with studies, activities and sports get equal attention.","Kids get a good balance of studies and extra activities."],
-  hing:["Padhai ke saath-saath activities aur sports pe bhi achha focus hai.","Bachchon ko studies aur activities dono ka sahi balance milta hai."],
-  hi:["पढ़ाई के साथ-साथ एक्टिविटीज़ और खेल पर भी अच्छा ध्यान दिया जाता है.","बच्चों को पढ़ाई और एक्टिविटीज़ दोनों का सही संतुलन मिलता है."]},
- communication:{en:["Communication was clear and honest at every step.","They kept us informed throughout — no confusion anywhere."],
-  hing:["Communication bilkul clear aur honest thi, har step pe.","Poore process mein update dete rahe, kahin confusion nahi hua."],
-  hi:["बातचीत बिल्कुल साफ़ और ईमानदार थी, हर कदम पर.","पूरी प्रक्रिया में अपडेट देते रहे, कहीं कोई भ्रम नहीं."]},
- clean:{en:["Everything is kept neat and clean.","The place is spotless and well maintained."],
-  hing:["Jagah bilkul saaf-suthri rakhte hain.","Sab kuch clean aur well maintained hai."],
-  hi:["जगह बिल्कुल साफ़-सुथरी रखते हैं.","सब कुछ साफ़ और अच्छी तरह मेंटेन रहता है."]},
- explains:{en:["They explain concepts so simply that nothing feels difficult.","Difficult topics are broken down in a very easy way."],
-  hing:["Concept itni aasani se samjhate hain ki kuch bhi mushkil nahi lagta.","Mushkil topics ko bhi bahut easy tarike se samjha dete hain."],
-  hi:["कॉन्सेप्ट इतनी आसानी से समझाते हैं कि कुछ भी मुश्किल नहीं लगता.","मुश्किल टॉपिक भी बहुत आसान तरीके से समझा देते हैं."]},
- attention:{en:["Every child gets personal attention, not just the toppers.","They actually track each child individually."],
-  hing:["Har bachche pe personal attention diya jaata hai, sirf toppers pe nahi.","Har bachche ko individually track karte hain."],
-  hi:["हर बच्चे पर पर्सनल अटेंशन दिया जाता है, सिर्फ़ टॉपर्स पर नहीं.","हर बच्चे को अलग-अलग ट्रैक करते हैं."]},
- tests:{en:["Regular tests and feedback keep us updated on progress.","Weekly tests and honest feedback — exactly what we wanted."],
-  hing:["Regular test aur feedback milte rehte hain, progress ka pata chalta rehta hai.","Weekly tests aur seedha feedback — yahi chahiye tha."],
-  hi:["नियमित टेस्ट और फ़ीडबैक मिलते रहते हैं, प्रगति का पता चलता रहता है.","हफ़्ते के टेस्ट और सीधा फ़ीडबैक — यही चाहिए था."]},
- friendly:{en:["Teachers are friendly — kids actually look forward to going.","The environment with teachers is warm and encouraging."],
-  hing:["Teachers bahut friendly hain, bachche khushi se jaate hain.","Teachers ke saath mahaul warm aur encouraging hai."],
-  hi:["टीचर्स बहुत फ्रेंडली हैं, बच्चे खुशी से जाते हैं.","टीचर्स के साथ माहौल गर्मजोशी भरा है."]},
- doubts:{en:["Any doubt gets cleared on the spot, no matter how small.","No question is too small — everything is patiently explained."],
-  hing:["Koi bhi doubt ho, turant clear kar dete hain.","Chhota se chhota sawaal patiently samjha diya jaata hai."],
-  hi:["कोई भी डाउट हो, तुरंत क्लियर कर देते हैं.","छोटे से छोटा सवाल भी धैर्य से समझा दिया जाता है."]},
- material:{en:["The study material is well organised and up to date.","Notes and material they give are actually useful."],
-  hing:["Study material bahut achha aur up-to-date hai.","Notes aur material sach mein useful hain."],
-  hi:["स्टडी मटेरियल बहुत अच्छा और अप-टू-डेट है.","दिए जाने वाले नोट्स और मटेरियल सच में काम के हैं."]},
- value:{en:["Complete value for money.","What you get here is worth every rupee."],
-  hing:["Paison ka poora value milta hai.","Jo mila, woh har rupaye ke barabar tha."],
-  hi:["पैसों का पूरा वैल्यू मिलता है.","जो मिला, वह हर रुपये के बराबर था."]},
- punctual:{en:["Timing is respected — everything runs on schedule.","Never had to wait; they value your time."],
-  hing:["Time ka poora khayal rakhte hain, sab schedule pe hota hai.","Kabhi wait nahi karna pada, aapka time value karte hain."],
-  hi:["समय का पूरा ध्यान रखते हैं, सब शेड्यूल पर होता है.","कभी इंतज़ार नहीं करना पड़ा, आपके समय को महत्व देते हैं."]},
- atmosphere:{en:["The atmosphere is welcoming and positive.","From the moment you walk in, you feel welcome."],
-  hing:["Mahaul bahut positive aur welcoming hai.","Andar aate hi khud ko welcome feel hota hai."],
-  hi:["माहौल बहुत सकारात्मक और स्वागत भरा है.","अंदर आते ही खुद को स्वागत महसूस होता है."]},
- investment:{
-  en:["From an investment point of view, this is one of the best decisions we made.","Property value here is only going up — a smart investment."],
-  hing:["Investment point of view se humara best decision tha — property ki value badh rahi hai.","Investment ke liye bilkul sahi jagah hai, value aage aur badhegi."],
-  hi:["इन्वेस्टमेंट के हिसाब से हमारा बेहतरीन फ़ैसला था — प्रॉपर्टी की वैल्यू बढ़ रही है.","निवेश के लिए बिल्कुल सही जगह है, वैल्यू आगे और बढ़ेगी."]},
- construction:{
-  en:["Construction quality is genuinely solid — you can see the difference.","Build quality is excellent, no shortcuts anywhere."],
-  hing:["Construction ki quality bahut solid hai, kahin bhi koi kami nahi.","Build quality kamal ki hai, quality mein koi compromise nahi."],
-  hi:["कंस्ट्रक्शन की क्वालिटी बहुत मज़बूत है, कहीं भी कोई कमी नहीं.","बिल्ड क्वालिटी कमाल की है, क्वालिटी में कोई समझौता नहीं."]},
- paperwork:{
-  en:["All the paperwork was clear and completed without any hassle.","Documentation was transparent and handled professionally."],
-  hing:["Saara paperwork clear aur proper tha, koi jhanjhat nahi.","Documentation bilkul transparent thi, sab kuch time pe complete hua."],
-  hi:["सारा कागज़ी काम साफ़ और सही था, कोई झंझट नहीं.","डॉक्यूमेंटेशन पूरी तरह पारदर्शी थी, सब कुछ समय पर हुआ."]},
- genuine_deal:{
-  en:["It is a completely genuine deal — exactly as promised.","Everything was fair and transparent, nothing hidden at all."],
-  hing:["Deal bilkul genuine thi, jaisa bola gaya waisa hi mila.","Koi hidden charge nahi, sab kuch saaf-saaf bataya gaya."],
-  hi:["डील बिल्कुल असली थी, जैसा वादा किया गया वैसा ही मिला.","कोई छिपा हुआ चार्ज नहीं, सब कुछ साफ़-साफ़ बताया गया."]},
- location:{
-  en:["The location is excellent — well connected and in a growing area.","Location is a big plus, everything important is nearby."],
-  hing:["Location bahut achhi hai, har taraf se connected hai.","Location ka plus point hai — school, market sab paas mein."],
-  hi:["लोकेशन बहुत अच्छी है, हर तरफ़ से जुड़ी हुई है.","लोकेशन का प्लस पॉइंट है — स्कूल, मार्केट सब पास में."]},
- registration:{
-  en:["The whole registration process went through smoothly, without any stress.","Registry was completed quickly and smoothly — fully their responsibility."],
-  hing:["Registration ka poora process smooth chala, koi dikkat nahi aayi.","Registry jaldi aur aaram se ho gayi, sab unke manage mein."],
-  hi:["रजिस्ट्रेशन की पूरी प्रक्रिया आसानी से हो गई, कोई परेशानी नहीं.","रजिस्ट्री जल्दी और आराम से हो गई, सब उनके मैनेज में."]},
- legal:{
-  en:["Everything is legally clear — documents are genuine and verified.","Full legal transparency — we checked everything with complete confidence."],
-  hing:["Legal sab kuch clear hai, documents verified aur genuine hain.","Poori legal transparency thi, bina dare sab check karaye."],
-  hi:["कानूनी रूप से सब कुछ साफ़ है, दस्तावेज़ असली और वेरिफाइड हैं.","पूरी लीगल पारदर्शिता थी, बिना डरे सब कुछ चेक कराया."]},
- pricing:{
-  en:["Pricing is fair and honest — no unnecessary costs.","Rates are genuine for the quality and location you get."],
-  hing:["Price bilkul fair hai, koi faltu charge nahi.","Rate genuine hain — location aur quality ke hisaab se sahi."],
-  hi:["कीमत बिल्कुल उचित है, कोई फ़ालतू चार्ज नहीं.","रेट ईमानदार हैं — लोकेशन और क्वालिटी के हिसाब से सही."]},
- trusted:{
-  en:["A developer you can trust — they keep their word.","Trustworthy team — every commitment was fulfilled."],
-  hing:["Bharosa kar sakte ho, jo kaha woh kiya.","Trusted developer hai, har commitment puri ki."],
-  hi:["भरोसा कर सकते हैं — जो कहा, वही किया.","भरोसेमंद डेवलपर है, हर वादा निभाया."]}
+/* ============ SENTENCE LIBRARY — same as the original app ============ */
+const TAG_LIB = {
+  results:{
+    en:["The results speak for themselves — we've seen a clear improvement.","Results here have always been good, and it shows."],
+    hing:["Results ki baat karein toh bilkul solid hai — farak saaf dikh raha hai.","Yahan results hamesha achhe rehte hain."],
+    hi:["रिज़ल्ट की बात करें तो बिल्कुल बढ़िया है — फ़र्क साफ़ दिखता है.","यहाँ के रिज़ल्ट हमेशा अच्छे रहते हैं."]},
+  staff_care:{
+    en:["The staff is genuinely caring and treats everyone warmly.","Staff here really cares — you can tell from day one."],
+    hing:["Staff bahut caring hai, sabse achhi baat yahi laga.","Staff ka behaviour bahut pyaar wala hai, sabka khayal rakhte hain."],
+    hi:["स्टाफ बहुत केयरिंग है, सबसे अच्छी बात यही लगी.","स्टाफ का व्यवहार बहुत स्नेह भरा है, सबका ख्याल रखते हैं."]},
+  fees:{
+    en:["And the pricing is very reasonable for what you get.","Fees are affordable without any compromise on quality."],
+    hing:["Fees bhi kaafi reasonable hai, value ka paisa vas.","Charges affordable hain, quality pe koi compromise nahi."],
+    hi:["फीस भी काफ़ी रीज़नेबल है, पैसों का पूरा वसूल.","चार्ज अफ़ोर्डेबल हैं और क्वालिटी पर कोई समझौता नहीं."]},
+  service:{
+    en:["Service is quick and handled properly every single time.","The service here is excellent — nothing to complain about."],
+    hing:["Service bahut achhi hai, har baar proper dhyan se kaam hota hai.","Yahan ki service kamal ki hai, koi shikayat nahi."],
+    hi:["सर्विस बहुत अच्छी है, हर बार ध्यान से काम होता है.","यहाँ की सर्विस कमाल की है, कोई शिकायत नहीं."]},
+  clean:{
+    en:["Everything is kept neat and clean.","The place is spotless and well maintained."],
+    hing:["Jagah bilkul saaf-suthri rakhte hain.","Sab kuch clean aur well maintained hai."],
+    hi:["जगह बिल्कुल साफ़-सुथरी रखते हैं.","सब कुछ साफ़ और अच्छी तरह मेंटेन रहता है."]},
+  value:{
+    en:["Complete value for money.","What you get here is worth every rupee."],
+    hing:["Paison ka poora value milta hai.","Jo mila, woh har rupaye ke barabar tha."],
+    hi:["पैसों का पूरा वैल्यू मिलता है.","जो मिला, वह हर रुपये के बराबर था."]},
+  punctual:{
+    en:["Timing is respected — everything runs on schedule.","Never had to wait; they value your time."],
+    hing:["Time ka poora khayal rakhte hain, sab schedule pe hota hai.","Kabhi wait nahi karna pada, aapka time value karte hain."],
+    hi:["समय का पूरा ध्यान रखते हैं, सब शेड्यूल पर होता है.","कभी इंतज़ार नहीं करना पड़ा, आपके समय को महत्व देते हैं."]},
+  atmosphere:{
+    en:["The atmosphere is welcoming and positive.","From the moment you walk in, you feel welcome."],
+    hing:["Mahaul bahut positive aur welcoming hai.","Andar aate hi khud ko welcome feel hota hai."],
+    hi:["माहौल बहुत सकारात्मक और स्वागत भरा है.","अंदर आते ही खुद को स्वागत महसूस होता है."]},
+  investment:{
+    en:["From an investment point of view, this is one of the best decisions we made.","Property value here is only going up — a smart investment."],
+    hing:["Investment point of view se humara best decision tha — property ki value badh rahi hai.","Investment ke liye bilkul sahi jagah hai, value aage aur badhegi."],
+    hi:["इन्वेस्टमेंट के हिसाब से हमारा बेहतरीन फ़ैसला था — प्रॉपर्टी की वैल्यू बढ़ रही है.","निवेश के लिए बिल्कुल सही जगह है, वैल्यू आगे और बढ़ेगी."]},
+  construction:{
+    en:["Construction quality is genuinely solid — you can see the difference.","Build quality is excellent, no shortcuts anywhere."],
+    hing:["Construction ki quality bahut solid hai, kahin bhi koi kami nahi.","Build quality kamal ki hai, quality mein koi compromise nahi."],
+    hi:["कंस्ट्रक्शन की क्वालिटी बहुत मज़बूत है, कहीं भी कोई कमी नहीं.","बिल्ड क्वालिटी कमाल की है, क्वालिटी में कोई समझौता नहीं."]},
+  paperwork:{
+    en:["All the paperwork was clear and completed without any hassle.","Documentation was transparent and handled professionally."],
+    hing:["Saara paperwork clear aur proper tha, koi jhanjhat nahi.","Documentation bilkul transparent thi, sab kuch time pe complete hua."],
+    hi:["सारा कागज़ी काम साफ़ और सही था, कोई झंझट नहीं.","डॉक्यूमेंटेशन पूरी तरह पारदर्शी थी, सब कुछ समय पर हुआ."]},
+  genuine_deal:{
+    en:["It is a completely genuine deal — exactly as promised.","Everything was fair and transparent, nothing hidden at all."],
+    hing:["Deal bilkul genuine thi, jaisa bola gaya waisa hi mila.","Koi hidden charge nahi, sab kuch saaf-saaf bataya gaya."],
+    hi:["डील बिल्कुल असली थी, जैसा वादा किया गया वैसा ही मिला.","कोई छिपा हुआ चार्ज नहीं, सब कुछ साफ़-साफ़ बताया गया."]},
+  location:{
+    en:["The location is excellent — well connected and in a growing area.","Location is a big plus, everything important is nearby."],
+    hing:["Location bahut achhi hai, har taraf se connected hai.","Location ka plus point hai — school, market sab paas mein."],
+    hi:["लोकेशन बहुत अच्छी है, हर तरफ़ से जुड़ी हुई है.","लोकेशन का प्लस पॉइंट है — स्कूल, मार्केट सब पास में."]},
+  registration:{
+    en:["The whole registration process went through smoothly, without any stress.","Registry was completed quickly and smoothly — fully their responsibility."],
+    hing:["Registration ka poora process smooth chala, koi dikkat nahi aayi.","Registry jaldi aur aaram se ho gayi, sab unke manage mein."],
+    hi:["रजिस्ट्रेशन की पूरी प्रक्रिया आसानी से हो गई, कोई परेशानी नहीं.","रजिस्ट्री जल्दी और आराम से हो गई, सब उनके मैनेज में."]},
+  legal:{
+    en:["Everything is legally clear — documents are genuine and verified.","Full legal transparency — we checked everything with complete confidence."],
+    hing:["Legal sab kuch clear hai, documents verified aur genuine hain.","Poori legal transparency thi, bina dare sab check karaye."],
+    hi:["कानूनी रूप से सब कुछ साफ़ है, दस्तावेज़ असली और वेरिफाइड हैं.","पूरी लीगल पारदर्शिता थी, बिना डरे सब कुछ चेक कराया."]},
+  pricing:{
+    en:["Pricing is fair and honest — no unnecessary costs.","Rates are genuine for the quality and location you get."],
+    hing:["Price bilkul fair hai, koi faltu charge nahi.","Rate genuine hain — location aur quality ke hisaab se sahi."],
+    hi:["कीमत बिल्कुल उचित है, कोई फ़ालतू चार्ज नहीं.","रेट ईमानदार हैं — लोकेशन और क्वालिटी के हिसाब से सही."]},
+  trusted:{
+    en:["A developer you can trust — they keep their word.","Trustworthy team — every commitment was fulfilled."],
+    hing:["Bharosa kar sakte ho, jo kaha woh kiya.","Trusted developer hai, har commitment puri ki."],
+    hi:["भरोसा कर सकते हैं — जो कहा, वही किया.","भरोसेमंद डेवलपर है, हर वादा निभाया."]}
 };
-const GEN={
- en:{open:["Really happy with my experience here.","We've had a great experience overall.","Been associated with them for a while now, and it never disappoints.","Honestly impressed — worth sharing my experience."],
-  close:["Would definitely recommend to everyone.","5 stars from my side — thank you!","If you're comparing options, just go here.","Big thanks to the whole team for the care they put in."],
-  conn:["Also,","Plus,","And"]},
- hing:{open:["Yahan ka experience bahut achha raha.","Overall bahut achha experience raha hai.","Kaafi time se jude hain, kabhi nirash nahi hue.","Sach kahoon toh bahut impressed hoon."],
-  close:["Doosron ko bhi recommend karunga/karungi.","5 star mere taraf se — dil se shukriya!","Koi compare kar raha ho toh yahin jaye, sochna mat.","Poori team ka bahut-bahut shukriya!"],
-  conn:["Aur toh aur,","Sath hi,","Plus,"]},
- hi:{open:["यहाँ का अनुभव बहुत अच्छा रहा.","समग्र रूप से बहुत अच्छा अनुभव रहा है.","काफ़ी समय से जुड़े हैं, कभी निराश नहीं हुए.","सच कहूँ तो बहुत प्रभावित हूँ."],
-  close:["सबको दिल से सुझाऊँगा/सुझाऊँगी.","मेरी तरफ़ से 5 स्टार — दिल से धन्यवाद!","कोई तुलना कर रहा हो तो यहीं जाएँ, सोचना मत.","पूरी टीम का बहुत-बहुत धन्यवाद!"],
-  conn:["और तो और,","साथ ही,","इसके अलावा,"]}
+const GEN = {
+  en:{
+    open:["Really happy with my experience here.","We've had a great experience overall.","Been associated with them for a while now, and it never disappoints.","Honestly impressed — worth sharing my experience."],
+    close:["Would definitely recommend to everyone.","5 stars from my side — thank you!","If you're comparing options, just go here.","Big thanks to the whole team for the care they put in."],
+    conn:["Also,","Plus,","And"]},
+  hing:{
+    open:["Yahan ka experience bahut achha raha.","Overall bahut achha experience raha hai.","Kaafi time se jude hain, kabhi nirash nahi hue.","Sach kahoon toh bahut impressed hoon."],
+    close:["Doosron ko bhi recommend karunga/karungi.","5 star mere taraf se — dil se shukriya!","Koi compare kar raha ho toh yahin jaye, sochna mat.","Poori team ka bahut-bahut shukriya!"],
+    conn:["Aur toh aur,","Sath hi,","Plus,"]},
+  hi:{
+    open:["यहाँ का अनुभव बहुत अच्छा रहा.","समग्र रूप से बहुत अच्छा अनुभव रहा है.","काफ़ी समय से जुड़े हैं, कभी निराश नहीं हुए.","सच कहूँ तो बहुत प्रभावित हूँ."],
+    close:["सबको दिल से सुझाऊँगा/सुझाऊँगी.","मेरी तरफ़ से 5 स्टार — दिल से धन्यवाद!","कोई तुलना कर रहा हो तो यहीं जाएँ, सोचना मत.","पूरी टीम का बहुत-बहुत धन्यवाद!"],
+    conn:["और तो और,","साथ ही,","इसके अलावा,"]}
 };
-const LATIN={en:1,hing:1};
-const lower1=s=>s.charAt(0).toLowerCase()+s.slice(1);
 
-function buildMsg(){
-  const g=GEN[state.lang];
-  const parts=[pick(g.open)];
-  shuffle([...state.tags]).slice(0,4).forEach((id,i)=>{
-    const lib=TAG_LIB[id]; if(!lib) return;
-    let s=pick(lib[state.lang]);
-    if(i>0&&Math.random()<0.55) s=pick(g.conn)+" "+(LATIN[state.lang]?lower1(s):s);
-    parts.push(s);
+/* happy / glad / trust emojis added to template drafts */
+const OPEN_EMOJI = ['😊','🙂','🥰'];
+const CLOSE_EMOJI = ['⭐','😊','🙏','👍'];
+const TAG_EMOJI = {
+  results:'🎯', staff_care:'💛', fees:'👍', service:'⭐', clean:'✨', value:'💯',
+  punctual:'⏰', atmosphere:'🌟', investment:'📈', construction:'🏗️', paperwork:'📝',
+  genuine_deal:'👌', location:'📍', registration:'✅', legal:'🛡️', pricing:'💰', trusted:'🤝'
+};
+
+/* ============================================================
+   APP — don't touch below unless you know JS
+   ============================================================ */
+const $ = id => document.getElementById(id);
+const LS = window.localStorage;
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+const LATIN = {en:1,hing:1};
+const lower1 = s => s.charAt(0).toLowerCase()+s.slice(1);
+
+const state = {
+  biz: +(LS.getItem('rv2_biz') || 0),
+  lang: LS.getItem('rv2_lang') || 'hing',
+  name:'', mob:'', prof:'', home:'',
+  tags: new Set(),
+  source:'Template',
+  lastEntry:null
+};
+let queue = JSON.parse(LS.getItem('rv2_queue') || '[]');
+
+function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),2600); }
+function go(id){ $(id).scrollIntoView({behavior:'smooth', block:'start'}); }
+
+/* ---------- header chip ---------- */
+function refreshChips(){
+  const log = JSON.parse(LS.getItem('rv2_log') || '[]');
+  $('countChip').textContent = '⭐ ' + log.length + ' reviews';
+};
+
+/* ---------- section 1 ---------- */
+function buildBizSeg(){
+  $('bizSeg').innerHTML = '';
+  BUSINESSES.forEach((b,i)=>{
+    const btn = document.createElement('button');
+    btn.textContent = b.name;
+    if(i === state.biz) btn.classList.add('sel');
+    btn.onclick = () => {
+      state.biz = i; LS.setItem('rv2_biz', i); buildBizSeg();
+      state.tags = new Set(); buildTags(); buildDraft(); updateSend();
+    };
+    $('bizSeg').appendChild(btn);
   });
-  parts.push(pick(g.close));
-  const gl=BUSINESSES[state.biz].gLink;
-  let m="Namaste! 🙏 Please post this short review on Google — edit it in your own words if you like:\n\n"+parts.join(" ");
-  if(gl) m+="\n\n⭐ Post it here: "+gl+"\n(Tap the link, paste the review, send — takes 30 seconds)";
-  return m;
+}
+function buildLangSeg(){
+  $('langSeg').innerHTML = '';
+  LANGS.forEach(l=>{
+    const btn = document.createElement('button');
+    btn.textContent = l.label;
+    if(l.id === state.lang) btn.classList.add('sel');
+    btn.onclick = () => { state.lang = l.id; LS.setItem('rv2_lang', l.id); buildLangSeg(); buildDraft(); updateSend(); };
+    $('langSeg').appendChild(btn);
+  });
+}
+$('cMob').addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g,'').slice(0,10); updateSend(); });
+$('cName').addEventListener('input', updateSend);
+
+function getProf(){ return $('cProf').value === 'Others' ? $('cProfOther').value.trim() : $('cProf').value; }
+function getHome(){ return $('cHome').value.trim(); }
+$('cHome').addEventListener('input', updateSend);
+$('cProf').addEventListener('change', () => {
+  const other = $('cProf').value === 'Others';
+  $('cProfOther').classList.toggle('hide', !other);
+  if(other) $('cProfOther').focus();
+  updateSend();
+});
+$('cProfOther').addEventListener('input', updateSend);
+
+/* validate details, then smooth-scroll to review section */
+$('down1').onclick = () => {
+  state.name = $('cName').value.trim();
+  state.mob = $('cMob').value.trim();
+  state.prof = getProf();
+  state.home = getHome();
+  if(!state.name){ toast('Enter the customer name first'); $('cName').focus(); return; }
+  if(!/^\d{10}$/.test(state.mob)){ toast('A 10-digit mobile number is required'); $('cMob').focus(); return; }
+  go('sec2');
+};
+
+/* ---------- section 2 ---------- */
+function buildTags(){
+  const biz = BUSINESSES[state.biz];
+  const wrap = $('tagWrap'); wrap.innerHTML = '';
+  biz.tags.forEach(t=>{
+    const btn = document.createElement('button');
+    btn.textContent = t.label;
+    if(state.tags.has(t.id)) btn.classList.add('sel');
+    btn.onclick = () => {
+      if(state.tags.has(t.id)) state.tags.delete(t.id); else state.tags.add(t.id);
+      btn.classList.toggle('sel');
+      buildDraft();
+    };
+    wrap.appendChild(btn);
+  });
+}
+function buildDraft(){
+  const g = GEN[state.lang];
+  const parts = [pick(g.open) + ' ' + pick(OPEN_EMOJI)];
+  const ids = shuffle([...state.tags]).slice(0,4); // stay natural — max 4 points
+  ids.forEach((id,i)=>{
+    const lib = TAG_LIB[id]; if(!lib) return;
+    let s = pick(lib[state.lang]);
+    if(i>0 && Math.random()<0.55) s = pick(g.conn)+" "+(LATIN[state.lang]?lower1(s):s);
+    const em = TAG_EMOJI[id];
+    parts.push(em ? s + ' ' + em : s);
+  });
+  parts.push(pick(g.close) + ' ' + pick(CLOSE_EMOJI));
+  $('draft').value = parts.join(' ');
+  state.source = 'Template';
+  updateSend();
+}
+$('shufBtn').onclick = () => buildDraft();
+$('aiBtn').onclick = aiDraft;
+async function aiDraft(){
+  if(!SHEET_URL){ toast('Set up the Google Sheet first (see Google-Sheet-Setup-v2.txt)'); return; }
+  const btn = $('aiBtn'); btn.disabled = true; btn.textContent = '✨ AI is writing...';
+  try{
+    const u = SHEET_URL + '?action=ai&pass=' + encodeURIComponent(PASS) +
+      '&lang=' + state.lang + '&biz=' + encodeURIComponent(BUSINESSES[state.biz].name) +
+      '&tags=' + encodeURIComponent([...state.tags].join(','));
+    const r = await fetch(u);
+    const j = await r.json();
+    if(j && j.ok && j.text && j.text.trim().length > 40){
+      $('draft').value = j.text.trim(); state.source = 'AI'; toast('✨ AI draft ready');
+    }else{
+      buildDraft(); toast('AI draft failed — template used');
+    }
+  }catch(e){
+    buildDraft(); toast('Could not reach AI — template used');
+  }
+  btn.disabled = false; btn.textContent = '✨ AI draft';
+  updateSend();
 }
 
-/* ============ HISTORY LOG ============ */
-const LOG_KEY="quickReviewLog_v1";
-function loadLog(){ try{ return JSON.parse(localStorage.getItem(LOG_KEY))||[]; }catch(e){ return []; } }
-function saveEntry(name,mobile,msg){
-  const b=BUSINESSES[state.biz];
-  const langLabel=(LANGS.find(l=>l.id===state.lang)||{}).label||"";
-  const tagLabels=[...state.tags].map(id=>{const t=b.tags.find(x=>x.id===id);return t?t.label:id;});
-  const entry={s:0,name:name,mobile:mobile,biz:b.name,lang:langLabel,
-    tags:tagLabels.join(", "),link:b.gLink||"",ts:new Date().toLocaleString("en-IN")};
-  const log=loadLog();
-  entry.s=log.length+1;
-  log.push(entry);
-  try{ localStorage.setItem(LOG_KEY,JSON.stringify(log)); }catch(e){}
-  renderCounter();
-  if(SHEET_URL){
-    try{
-      fetch(SHEET_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(entry)});
-    }catch(e){}
+/* ---------- voice input (customer's own words, as-is) ---------- */
+let rec = null, recOn = false;
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+$('micBtn').onclick = () => {
+  if(!SR){ toast('Voice input works in Chrome — please type instead'); return; }
+  if(recOn){ rec.stop(); return; }
+  rec = new SR();
+  rec.lang = state.lang === 'en' ? 'en-IN' : 'hi-IN';
+  rec.continuous = true;
+  rec.interimResults = true;
+  let finalText = '';
+  rec.onresult = (e) => {
+    let interim = '';
+    for(let i = e.resultIndex; i < e.results.length; i++){
+      const t = e.results[i][0].transcript;
+      if(e.results[i].isFinal){
+        finalText += (finalText && !/[.!?।]\s*$/.test(finalText) ? '. ' : '') + t.trim();
+      }else{
+        interim += t;
+      }
+    }
+    /* customer ke bol ko jaisa hai waisa hi draft me daalo */
+    $('draft').value = (finalText + (interim ? ' ' + interim : '')).trim();
+    state.source = 'Voice';
+    updateSend();
+  };
+  rec.onstart = () => {
+    recOn = true;
+    $('micBtn').classList.add('rec');
+    $('micBtn').textContent = '🎙 Listening... tap to stop';
+  };
+  rec.onend = () => {
+    recOn = false;
+    $('micBtn').classList.remove('rec');
+    $('micBtn').textContent = '🎙 Speak in your own words — tap to record';
+    if(!$('draft').value.trim()) toast('Nothing was heard — try again closer to the mic');
+    updateSend();
+  };
+  rec.onerror = (e) => {
+    if(e.error === 'not-allowed'){ toast('Allow microphone permission in the browser'); }
+    else if(e.error !== 'aborted' && e.error !== 'no-speech'){ toast('Voice error — please try again'); }
+  };
+  rec.start();
+  toast('Listening... speak now');
+};
+
+/* ---------- section 3 (live update) ---------- */
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function updateSend(){
+  const biz = BUSINESSES[state.biz];
+  const review = $('draft').value.trim();
+  $('preview').textContent = review || 'Pick tags — the draft will appear here.';
+  const homeTxt = getHome();
+  $('recLine').innerHTML = '<b>' + esc($('cName').value.trim() || 'Customer') + '</b>' +
+    (($('cMob').value.trim().length===10) ? ' (' + $('cMob').value.trim() + ')' : '') +
+    (homeTxt ? ' &middot; ' + esc(homeTxt) : '') +
+    ' &middot; ' + esc(biz.name) +
+    (biz.gLink ? ' &middot; Google link goes with the message' : '');
+  const msg = review + (biz.gLink ? '\n\nGoogle Review Link: ' + biz.gLink : '');
+  $('waBtn').href = 'https://wa.me/' + COUNTRY_CODE + ($('cMob').value.trim() || '0000000000') + '?text=' + encodeURIComponent(msg);
+  if(biz.gLink){ $('gBtn').style.display=''; $('qrBtn').style.display=''; $('gBtn').href = biz.gLink; }
+  else{ $('gBtn').style.display='none'; $('qrBtn').style.display='none'; }
+}
+
+/* WhatsApp tap = validate + log + done card */
+$('waBtn').addEventListener('click', (ev) => {
+  const name = $('cName').value.trim(), mob = $('cMob').value.trim();
+  if(!name){ ev.preventDefault(); toast('Enter the customer name first'); go('sec1'); $('cName').focus(); return; }
+  if(!/^\d{10}$/.test(mob)){ ev.preventDefault(); toast('A 10-digit mobile number is required'); go('sec1'); $('cMob').focus(); return; }
+  if($('cProf').value === 'Others' && !$('cProfOther').value.trim()){ ev.preventDefault(); toast('Please type the profession (Others)'); go('sec1'); $('cProfOther').focus(); return; }
+  $('waBtn').href = buildWaHref();
+  logAndQueue($('draft').value.trim());
+  $('doneCard').classList.remove('hide');
+  setTimeout(()=>go('doneCard'), 350);
+});
+function buildWaHref(){
+  const biz = BUSINESSES[state.biz];
+  const msg = $('draft').value.trim() + (biz.gLink ? '\n\nGoogle Review Link: ' + biz.gLink : '');
+  return 'https://wa.me/' + COUNTRY_CODE + $('cMob').value.trim() + '?text=' + encodeURIComponent(msg);
+}
+async function logAndQueue(review){
+  /* same review tapped again within 3 min = no duplicate */
+  if(state.lastEntry && state.lastEntry.review === review && (Date.now() - new Date(state.lastEntry.ts).getTime()) < 3*60e3){
+    return;
+  }
+  const entry = {
+    id: 'R' + Date.now() + Math.floor(Math.random()*90+10),
+    ts: new Date().toISOString(),
+    biz: BUSINESSES[state.biz].name,
+    name: state.name || $('cName').value.trim(),
+    mob: state.mob || $('cMob').value.trim(),
+    prof: state.prof || getProf(),
+    home: state.home || getHome(),
+    lang: state.lang, tags: [...state.tags].join(', '),
+    source: state.source, review: review,
+    status: 'Sent', postedAt: ''
+  };
+  state.lastEntry = entry;
+  const log = JSON.parse(LS.getItem('rv2_log') || '[]');
+  log.push(entry); LS.setItem('rv2_log', JSON.stringify(log));
+  refreshChips();
+  $('doneLine').textContent = 'WhatsApp sent to ' + entry.name + '.';
+  if(SHEET_URL){ syncEntry(entry); } else { setSync('📴 No Sheet URL — log stays on this phone'); }
+}
+async function syncEntry(entry){
+  setSync('☁️ Saving to Sheet...');
+  try{
+    const r = await fetch(SHEET_URL, { method:'POST', body: JSON.stringify({action:'new', pass:PASS, entry:entry}) });
+    const j = await r.json();
+    if(j && j.ok){ setSync('☁️ Saved to Sheet'); return true; }
+    throw new Error('bad');
+  }catch(e){
+    if(!queue.find(q=>q.id===entry.id)){ queue.push(entry); LS.setItem('rv2_queue', JSON.stringify(queue)); }
+    setSync('⚠️ Offline — will auto-sync later');
+    return false;
   }
 }
-function renderCounter(){ $("cnt").textContent=loadLog().length; }
+async function retryQueue(){
+  if(!SHEET_URL || !queue.length) return;
+  const baaki = [];
+  for(const entry of queue){ const ok = await syncEntry(entry); if(!ok) baaki.push(entry); }
+  queue = baaki; LS.setItem('rv2_queue', JSON.stringify(queue));
+}
+function setSync(t){ $('syncState').textContent = t; }
 
-function renderBiz(){
-  $("bizTabs").innerHTML=BUSINESSES.map((b,i)=>`<div class="tab ${i===state.biz?"active":""}" data-i="${i}">${b.name}</div>`).join("");
-  [...$("bizTabs").children].forEach(t=>t.onclick=()=>{state.biz=+t.dataset.i;state.tags.clear();renderBiz();renderChips();});
-}
-function renderChips(){
-  $("chips").innerHTML=BUSINESSES[state.biz].tags.map(t=>`<div class="chip ${state.tags.has(t.id)?"on":""}" data-id="${t.id}">${t.label}</div>`).join("");
-  [...$("chips").children].forEach(c=>c.onclick=()=>{const id=c.dataset.id;state.tags.has(id)?state.tags.delete(id):state.tags.add(id);c.classList.toggle("on");$("tagsErr").style.display="none";});
-}
-function renderLang(){
-  $("langSeg").innerHTML=LANGS.map(l=>`<div class="seg-b ${l.id===state.lang?"active":""}" data-id="${l.id}">${l.label}</div>`).join("");
-  [...$("langSeg").children].forEach(b=>b.onclick=()=>{state.lang=b.dataset.id;renderLang();});
-}
-$("mobile").addEventListener("input",e=>{e.target.value=e.target.value.replace(/\D/g,"").slice(0,10);if(/^\d{10}$/.test(e.target.value))$("mobileErr").style.display="none";});
+/* QR + copy */
+$('qrBtn').onclick = () => {
+  const biz = BUSINESSES[state.biz];
+  if(!biz.gLink || typeof QRCode === 'undefined'){ toast('QR is not available right now'); return; }
+  $('qrbox').innerHTML = '';
+  new QRCode($('qrbox'), { text: biz.gLink, width: 220, height: 220, correctLevel: QRCode.CorrectLevel.M });
+  $('qrModal').classList.add('show');
+};
+$('qrClose').onclick = () => $('qrModal').classList.remove('show');
+$('copyBtn').onclick = async () => {
+  const biz = BUSINESSES[state.biz];
+  const txt = $('draft').value.trim() + (biz.gLink ? '\n\nGoogle Review Link: ' + biz.gLink : '');
+  try{ await navigator.clipboard.writeText(txt); toast('Copied'); }
+  catch(e){
+    const ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy'); ta.remove(); toast('Copied');
+  }
+};
 
-$("shuffleBtn").onclick=()=>{
-  if(!state.tags.size){$("tagsErr").style.display="block";return;}
-  $("preview").value=buildMsg();
+/* ---------- done card ---------- */
+$('postedBtn').onclick = async () => {
+  const e = state.lastEntry; if(!e) return;
+  e.status = 'Posted'; e.postedAt = new Date().toISOString();
+  const log = JSON.parse(LS.getItem('rv2_log') || '[]');
+  const i = log.findIndex(x=>x.id===e.id); if(i>-1) log[i]=e;
+  LS.setItem('rv2_log', JSON.stringify(log));
+  $('postedBtn').disabled = true; $('postedBtn').textContent = '✅ Marked as posted';
+  toast('It will show as Posted in the Dashboard');
+  if(SHEET_URL){
+    try{ await fetch(SHEET_URL, { method:'POST', body: JSON.stringify({action:'posted', pass:PASS, id:e.id}) }); }catch(err){}
+  }
 };
-$("sendBtn").onclick=()=>{
-  const nm=$("name").value.trim();
-  if(!nm){$("nameErr").style.display="block";$("name").focus();return;}
-  const m=$("mobile").value.replace(/\D/g,"");
-  if(!/^\d{10}$/.test(m)){$("mobileErr").style.display="block";$("mobile").focus();return;}
-  if(!state.tags.size&&!$("preview").value.trim()){$("tagsErr").style.display="block";return;}
-  let msg=$("preview").value.trim();
-  if(!msg){ msg=buildMsg(); $("preview").value=msg; }
-  saveEntry(nm,m,msg);
-  window.open("https://wa.me/"+COUNTRY_CODE+m+"?text="+encodeURIComponent(msg),"_blank");
+$('nextBtn').onclick = () => {
+  $('cName').value=''; $('cMob').value=''; $('cProf').value=PROFESSIONS[0];
+  $('cProfOther').value=''; $('cProfOther').classList.add('hide');
+  $('cHome').value='';
+  state.home='';
+  state.name=''; state.mob=''; state.tags = new Set(); state.lastEntry = null;
+  $('postedBtn').disabled = false; $('postedBtn').innerHTML = '&#9989; Review posted &mdash; mark it';
+  $('doneCard').classList.add('hide');
+  buildTags(); buildDraft();
+  go('sec1');
 };
-renderBiz();renderChips();renderLang();renderCounter();
+
+/* ---------- init ---------- */
+(function init(){
+  PROFESSIONS.forEach(p=>{ const o=document.createElement('option'); o.value=p; o.textContent=p; $('cProf').appendChild(o); });
+  buildBizSeg(); buildLangSeg(); refreshChips();
+  buildTags(); buildDraft();
+  setSync(SHEET_URL ? '☁️ Sheet connected' : '📴 Sheet URL not set');
+  retryQueue();
+})();
 </script>
 </body>
 </html>
